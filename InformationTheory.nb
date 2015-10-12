@@ -1,0 +1,260 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      8918,        251]
+NotebookOptionsPosition[      7933,        218]
+NotebookOutlinePosition[      8276,        233]
+CellTagsIndexPosition[      8233,        230]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[TextData[{
+ StyleBox["Information Theory",
+  FontSize->18,
+  FontWeight->"Bold"],
+ StyleBox["\nEntropy H[X]",
+  FontWeight->"Bold"]
+}], "Text",
+ CellChangeTimes->{{3.652798176999323*^9, 3.652798185674819*^9}, {
+  3.65279872348158*^9, 3.6527987253456864`*^9}, {3.6527992486416173`*^9, 
+  3.6527992577771397`*^9}, {3.6536640346370316`*^9, 3.6536640394603076`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"H", "[", "X_", "]"}], ":=", " ", 
+   RowBox[{
+    RowBox[{"Entropy", "[", "X", "]"}], "//", "N"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.652797558163927*^9, 3.652797603294509*^9}, 
+   3.6527976521583033`*^9, {3.6533798400603447`*^9, 3.653379840802678*^9}}],
+
+Cell[TextData[StyleBox["Conditional Entropy ( H[ X | Y ] ) ",
+ FontWeight->"Bold"]], "Text",
+ CellChangeTimes->{{3.652798227181193*^9, 3.652798251888606*^9}, {
+  3.6532371476416807`*^9, 3.6532371764583287`*^9}, {3.6536021496843543`*^9, 
+  3.653602151815476*^9}}],
+
+Cell[TextData[{
+ "*)",
+ StyleBox["The original Statistics`Library`NConditionalEntropy is only work \
+for base 2, thus here I multiply it with Log[2] to have it works under base e",
+  FontSlant->"Italic"]
+}], "Text",
+ CellChangeTimes->{{3.653614851282844*^9, 3.653614864313589*^9}, {
+  3.653627516566678*^9, 3.6536275185355883`*^9}, {3.6536639086798277`*^9, 
+  3.653663994637744*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"CH", "[", 
+    RowBox[{"X_", ",", " ", "Y_"}], "]"}], ":=", 
+   RowBox[{
+    RowBox[{"Statistics`Library`NConditionalEntropy", "[", 
+     RowBox[{"X", ",", "Y"}], "]"}], " ", "*", " ", 
+    RowBox[{"Log", "[", "2", "]"}]}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.6527977489848413`*^9, 3.6527977915922785`*^9}, {
+   3.6527981337638497`*^9, 3.652798150394801*^9}, 3.653235888569666*^9, 
+   3.653371988304745*^9, 3.653372042038745*^9, {3.6536275210087557`*^9, 
+   3.6536275247270284`*^9}}],
+
+Cell["\<\
+Alternative calculation for Conditional Entropy. It defines as the average \
+entropy of X for each value in Y\
+\>", "Text",
+ CellChangeTimes->{{3.652797829784463*^9, 3.6527978377149167`*^9}, {
+  3.6527981257873936`*^9, 3.6527981288945713`*^9}, {3.6527982757389708`*^9, 
+  3.6527982760969906`*^9}, {3.652798312841092*^9, 3.6527983141181655`*^9}, {
+  3.652798514068602*^9, 3.6527985275683737`*^9}, {3.6530507749600277`*^9, 
+  3.653050778605236*^9}, {3.6536022437717357`*^9, 3.6536022526892457`*^9}, {
+  3.6536640077214923`*^9, 3.653664024096429*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"ACH", "[", 
+    RowBox[{"X_", ",", "Y_"}], "]"}], ":=", 
+   RowBox[{"Mean", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"Entropy", "[", 
+       RowBox[{"Pick", "[", 
+        RowBox[{"X", ",", "Y", ",", "#"}], "]"}], "]"}], "&"}], "/@", "Y"}], 
+    "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.6527978215949945`*^9, 3.6527978216189957`*^9}, {
+   3.652798786310173*^9, 3.6527987929255514`*^9}, {3.653050756026945*^9, 
+   3.6530507659725137`*^9}, {3.6532219056007566`*^9, 3.653221913144188*^9}, 
+   3.6532358942239895`*^9, {3.653236434361883*^9, 3.6532364866768756`*^9}, {
+   3.6532365173266287`*^9, 3.653236518148676*^9}, {3.653602155741701*^9, 
+   3.6536021558957095`*^9}, 3.653604793174553*^9, {3.653610706171757*^9, 
+   3.6536107068537965`*^9}}],
+
+Cell[TextData[StyleBox["Joint Entropy",
+ FontWeight->"Bold"]], "Text",
+ CellChangeTimes->{{3.6536021694704857`*^9, 3.653602174860794*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"JH", "[", 
+    RowBox[{"X_", ",", "Y_"}], "]"}], ":=", " ", 
+   RowBox[{
+    RowBox[{"CH", "[", 
+     RowBox[{"X", ",", "Y"}], "]"}], "+", 
+    RowBox[{"H", "[", "Y", "]"}]}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.6532359036915307`*^9, 3.6532359571165867`*^9}, 
+   3.6536047910254307`*^9, 3.653614707255606*^9, 3.6536276448455343`*^9}],
+
+Cell[TextData[StyleBox["Conditional Entropy under three variables",
+ FontWeight->"Bold"]], "Text",
+ CellChangeTimes->{{3.6536048055942636`*^9, 3.6536048199780865`*^9}, {
+  3.6536641514347124`*^9, 3.653664151996744*^9}}],
+
+Cell[TextData[StyleBox["1. H[X,Y | Z] : average entropy of (X,Y) for each \
+value in Z",
+ FontWeight->"Bold"]], "Text",
+ CellChangeTimes->{{3.65360434361484*^9, 3.653604367416201*^9}, {
+  3.6536048674978046`*^9, 3.653604867669814*^9}, {3.653606011038211*^9, 
+  3.6536060333874893`*^9}, {3.6536069444766006`*^9, 3.6536069550202036`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"CHZ", "[", 
+    RowBox[{"X_", ",", " ", "Y_", ",", " ", "Z_"}], "]"}], ":=", 
+   RowBox[{"Mean", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"JH", "[", 
+       RowBox[{
+        RowBox[{"Pick", "[", 
+         RowBox[{"X", ",", "Z", ",", "#"}], "]"}], ",", 
+        RowBox[{"Pick", "[", 
+         RowBox[{"Y", ",", "Z", ",", "#"}], "]"}]}], "]"}], "&"}], "/@", 
+     "Z"}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.6536046122182035`*^9, 3.6536046145863385`*^9}, {
+   3.6536046870204816`*^9, 3.6536046952619534`*^9}, 3.6536047263137293`*^9, 
+   3.6536047892093267`*^9}],
+
+Cell[TextData[StyleBox["2. H[X | Y, Z]",
+ FontWeight->"Bold"]], "Text",
+ CellChangeTimes->{{3.653604653336555*^9, 3.65360466950548*^9}, {
+  3.6536048701919584`*^9, 3.6536048703769693`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"CHYZ", "[", 
+    RowBox[{"X_", ",", "Y_", ",", "Z_"}], "]"}], ":=", 
+   RowBox[{
+    RowBox[{"CHZ", "[", 
+     RowBox[{"Y", ",", "X", ",", "Z"}], "]"}], " ", "-", " ", 
+    RowBox[{"CH", "[", 
+     RowBox[{"Y", ",", "Z"}], "]"}]}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.653604675611829*^9, 3.6536047864191666`*^9}}],
+
+Cell[TextData[StyleBox["Mutual Information ",
+ FontWeight->"Bold"]], "Text",
+ CellChangeTimes->{{3.652798693453862*^9, 3.6527987155411253`*^9}, {
+   3.6532330198875866`*^9, 3.6532330294861355`*^9}, 3.653604839871224*^9}],
+
+Cell[TextData[StyleBox["1. I[X; Y] = H [X] - H [X | Y]",
+ FontWeight->"Bold"]], "Text",
+ CellChangeTimes->{{3.6536048419733443`*^9, 3.6536048742511907`*^9}, {
+  3.653604917827683*^9, 3.653604925175103*^9}, {3.65360693293194*^9, 
+  3.65360693485005*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"MI", "[", 
+   RowBox[{"X_", ",", " ", "Y_"}], "]"}], ":=", 
+  RowBox[{
+   RowBox[{"H", "[", "X", "]"}], "-", 
+   RowBox[{"CH", "[", 
+    RowBox[{"X", ",", "Y"}], "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.652798623511862*^9, 3.652798673025694*^9}, 
+   3.653372112203745*^9, 3.653614726079683*^9, 3.653629819561908*^9}],
+
+Cell[TextData[StyleBox["2. I[X;Y|Z] = H[X] - H[X | Y,Z]",
+ FontWeight->"Bold"]], "Text",
+ CellChangeTimes->{{3.653604882740676*^9, 3.653604939400917*^9}, {
+  3.653606938123237*^9, 3.653606938742273*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"MIZ", "[", 
+    RowBox[{"X_", ",", "Y_", ",", "Z_"}], "]"}], ":=", 
+   RowBox[{
+    RowBox[{"H", "[", "X", "]"}], " ", "-", " ", 
+    RowBox[{"CHYZ", "[", 
+     RowBox[{"X", ",", "Y", ",", "Z"}], "]"}]}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.6536049519096327`*^9, 3.6536049884117203`*^9}}],
+
+Cell["3 . I[X; Y, Z] = I[X;Z] + I[X;Y|Z]", "Text",
+ CellChangeTimes->{{3.65360722455262*^9, 3.6536073159138455`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"MIZ2", "[", 
+    RowBox[{"X_", ",", "Y_", ",", "Z_"}], "]"}], ":=", " ", 
+   RowBox[{
+    RowBox[{"MI", "[", 
+     RowBox[{"X", ",", "Z"}], "]"}], "+", 
+    RowBox[{"MIZ", "[", 
+     RowBox[{"X", ",", "Y", ",", "Z"}], "]"}]}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.653607319539053*^9, 3.6536073688778753`*^9}}]
+},
+WindowSize->{931, 938},
+WindowMargins->{{5, Automatic}, {8, Automatic}},
+FrontEndVersion->"10.0 for Microsoft Windows (64-bit) (December 4, 2014)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 367, 9, 54, "Text"],
+Cell[928, 31, 306, 7, 31, "Input"],
+Cell[1237, 40, 262, 4, 30, "Text"],
+Cell[1502, 46, 383, 8, 49, "Text"],
+Cell[1888, 56, 535, 12, 31, "Input"],
+Cell[2426, 70, 558, 9, 30, "Text"],
+Cell[2987, 81, 799, 18, 31, "Input"],
+Cell[3789, 101, 138, 2, 30, "Text"],
+Cell[3930, 105, 385, 10, 31, "Input"],
+Cell[4318, 117, 219, 3, 30, "Text"],
+Cell[4540, 122, 336, 5, 30, "Text"],
+Cell[4879, 129, 623, 17, 31, "Input"],
+Cell[5505, 148, 189, 3, 30, "Text"],
+Cell[5697, 153, 365, 10, 31, "Input"],
+Cell[6065, 165, 220, 3, 30, "Text"],
+Cell[6288, 170, 253, 4, 30, "Text"],
+Cell[6544, 176, 353, 9, 31, "Input"],
+Cell[6900, 187, 203, 3, 30, "Text"],
+Cell[7106, 192, 340, 9, 31, "Input"],
+Cell[7449, 203, 117, 1, 30, "Text"],
+Cell[7569, 206, 360, 10, 31, "Input"]
+}
+]
+*)
+
+(* End of internal cache information *)
