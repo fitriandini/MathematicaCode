@@ -1,0 +1,33 @@
+(* The copy paste - friendly mathematica code :p *)
+(* Information Theory *)
+
+(* Entropy H[X] *)
+H[X_] := Entropy[X] // N;
+
+(* Conditional Entropy ( H[ X | Y ] )  *)
+(* The Statistics`Library`NConditionalEntropy is only work for base 2, thus here I multiply it with Log[2] to have it works under base e *)
+CH[X_, Y_] := Statistics`Library`NConditionalEntropy[X, Y] * Log[2];
+
+(* Alternative calculation for Conditional Entropy. It defines as the average entropy of X for each value in Y *)
+ACH[X_, Y_] := Mean[Entropy[Pick[X, Y, #]] & /@ Y];
+
+(*  Joint Entropy H[X,Y]  *)
+JH[X_, Y_] := CH[X, Y] + H[Y];
+
+(*   Conditional Entropy under three variables  *)
+(* 1. H[X,Y | Z] : average entropy of (X,Y) for each value in Z *)
+CHZ[X_, Y_, Z_] := Mean[JH[Pick[X, Z, #], Pick[Y, Z, #]] & /@ Z];
+
+(*  2. H[X | Y, Z]  *)
+CHYZ[X_, Y_, Z_] := CHZ[Y, X, Z] - CH[Y, Z];
+
+(* Mutual Information *)
+(*  1. I[X; Y] = H [X] - H [X | Y]  *)
+MI[X_, Y_] := H[X] - CH[X, Y]
+
+(* 2. I[X;Y|Z] = H[X] - H[X | Y,Z] *)
+MIZ[X_, Y_, Z_] := H[X] - CHYZ[X, Y, Z];
+
+(* 3 . I[X; Y, Z] = I[X;Z] + I[X;Y|Z] *)
+MIZ2[X_, Y_, Z_] := MI[X, Z] + MIZ[X, Y, Z];
+
